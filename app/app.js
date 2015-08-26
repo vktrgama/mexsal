@@ -1,4 +1,4 @@
-angular.module('myApp', [])
+angular.module('mexsalApp', [])
 	.controller('SigninController', ['$scope', '$http', function($scope, $http) {
 		this.postForm = function() {
 			

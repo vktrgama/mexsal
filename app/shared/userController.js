@@ -1,4 +1,4 @@
-angular.module('myApp', [])
+angular.module('mexsalApp', [])
 .controller('UserInfo',  ['$scope', '$http', function($scope,$http){
 	
 	// post if made as json content type (default)

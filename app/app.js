@@ -2,18 +2,14 @@ angular.module('myApp', [])
 	.controller('SigninController', ['$scope', '$http', function($scope, $http) {
 		this.postForm = function() {
 			
-			var encodedString = 'email=' + encodeURIComponent(this.email) +
-				'&password=' + encodeURIComponent(this.password);
-		
+			// post if made as json content type (default)
 			$http({
 				method: 'POST',
-				url: 'dal/login.php',
-				data: encodedString,
-				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+				url: 'dal/userRepo.php',
+				data: { "Func": "AuthUser", "Data": [{"email": this.email , "password": this.password }] }
 			})
 			.success(function(data, status, headers, config) {
-				console.log(data);
-				if ( data === true) {
+				if ( data ) {
 					window.location.href = 'pmdash.html';
 				} else {
 					$scope.errorMsg = "Login not correct";
@@ -22,6 +18,7 @@ angular.module('myApp', [])
 			.error(function(data, status, headers, config) {
 				$scope.errorMsg = 'Unable to submit form';
 			})
+			
 		}
 	}])//end of controller
 //end of app	

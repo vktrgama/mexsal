@@ -1,14 +1,15 @@
 angular.module('myApp', [])
 .controller('UserInfo',  ['$scope', '$http', function($scope,$http){
 	
-	// pick userId from session	
-	var encodedString = 'email=' + encodeURIComponent(this.email);
-			
+	// post if made as json content type (default)
 	$http({
 		method: 'POST',
-		url: 'dal/userinfo.php',
-		data: encodedString,
-		headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-	}).success(function(response){
+		url: 'dal/userRepo.php',
+		//TODO: user email should come from the session object
+		data: { "Func": "GetUserInfo", "Data": [{"email": "renesanchez@mexsal.com" }] }
+	})
+	.success(function(response){
 		$scope.userInfo = response;
-})}]);
+	})
+
+}]);

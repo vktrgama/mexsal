@@ -1,0 +1,221 @@
+@charset "utf-8";
+/* CSS Document */
+/*reset*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style:normal;
+}
+
+/* MexSal Style Sheet */
+h2.title  {
+	
+			color:gray;
+			margin: 10px;
+			
+}
+
+
+body {
+			background: linear-gradient( #524F4F, white);
+			font-family:Arial, sans-serif;
+			font-style:normal;
+			font-weight:normal;
+			background-color:#524F4F;
+			margin: 0px;
+			width: 800px;
+			height: 100%;
+}
+
+span.note {
+	
+			font-size:160%;
+			color:#8EA288;
+		
+}
+
+img.logo {
+			float: left;
+			padding-right: 30px;
+			
+}
+
+ul#menu li {
+			text-decoration:none;
+			list-style-type:none;
+    		display:inline;
+			margin: 10px;
+			font-weight:bold;
+			color:#8EA288;
+}
+
+ul#menu li:hover {
+			text-decoration:none;
+			background-color:#8EA288;
+			margin: 10px;
+			color:black;
+			
+}
+ul#menu a {
+			text-decoration:none;
+			list-style-type:none;
+    		display:inline;
+			margin: 10px;
+			font-weight:bold;
+			color:#8EA288;
+}
+
+ul#menu a:hover {
+			text-decoration:none;
+			background-color:#8EA288;
+			margin: 10px;
+			color:black;
+			
+}
+
+div.menu {
+			background: linear-gradient( black, black, gray, black, black, black, black, black, black, black,black);
+			background-color:black;
+			font-size:80%;
+			color:#8EA288;
+			
+		
+}
+div.barleft {
+			float: left;
+			background-color:black;
+			font-size:16px;
+			color:#524F4F;
+			width: 50px;
+			height: 100%;
+			boder-radius:10pm;
+		
+}
+div.barcenter {
+			
+			margin-left: 0px;
+			float: left;
+			background-color:transparent;
+			font-size:80%;
+			color:black;
+			width: 600px;
+			height: 100%;
+			
+		
+}
+div.barright {
+			
+			float: left;
+			background-color:#8EA288;
+			font-size:80%;
+			color:#524F4F;
+			width: 150px;
+			height: 100%;
+			border-radius:10px;
+		
+}
+
+p.barleft {
+			font-weight:bold;
+			background-color:black;
+			font-size:14px;
+			color:white;
+			padding: 5px;
+			
+		
+}
+
+p.barcenter {
+	
+			align-content:center;
+			background-color:white;
+			font-weight:bold;
+			font-size:14px;
+			color:black;
+			padding: 10px;
+			align: center;
+		
+}
+
+p.barright {
+			
+			font-weight:bold;
+			font-size:14px;
+			color:#524F4F;
+			padding: 5px;
+			
+		
+}
+p.barrighttitle {
+			
+			font-weight:bold;
+			background-color:black;
+			font-size:14px;
+			color:#8EA288;
+			padding: 5px;
+			
+		
+}
+
+div.footer {
+			float: left;
+			font-family:Arial, sans-serif;
+			background-color:transparent;
+			text-align:center;
+			font-size:14px;
+			font-style:normal;
+			color:black;
+			padding-left: 60px;
+			font-weight:bold;
+		}
+iframe.sites{
+			background-color:transparent;
+			seamless:seamless;
+			scrolling:auto;
+			margin-left: 0px;
+			width: 580px;
+			height: 800px;
+}
+iframe.user{
+			background-color:#8EA288;
+			scrolling:no;
+			float:left;
+			seamless:seamless;
+			scrolling:auto;
+			margin-left: 0px;
+			width: 150px;
+			height: 230px;
+			font-weight: bold;
+			color: #524F4F;
+			font-size: 12px;
+}
+input.form-control  {
+			border:none;
+			background-color:white;
+			font-size:14px;
+			color:#8EA288;
+			margin: 5px;
+			width: 160px;
+			height: 15px;
+}
+button.btn  {
+			width: 160px;
+			height: 25px;
+			background-color:black;
+			color:#8EA288;
+			margin: 5px;
+			align:center;
+			font-style:bold;
+			border:none;
+}
+button.btn:hover {
+			font-size:14px;
+			background-color:#524F4F;
+			color:white;
+			border:none;
+}

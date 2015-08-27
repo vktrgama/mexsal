@@ -10,6 +10,9 @@
       <ul class="nav navbar-nav" ng-controller="SigninController as SigninCtrl">
         <li class="active"><a href="#/about">About</a></li>
         <li><a href="#/tools">Toolset</a></li>
+        <li ng-show="IsLoggedIn"><a href="#">Site Information</a></li>
+        <li ng-show="IsLoggedIn"><a href="#">Update Site</a></li>
+        <li ng-show="IsLoggedIn"><a href="#">Add Site</a></li>
         <!-- logged in options -->
         <li ng-hide="IsLoggedIn" class="navbar-right">
           <form class="navbar-form" ng-submit="SigninCtrl.postForm()">

@@ -1,7 +1,7 @@
 /*
 * Main AngularJS Web Application
 */
-var app = angular.module('mexsalApp', ['ngRoute']);
+var app = angular.module('mexsalApp', ['ngRoute', 'ngCookies']);
 
 /*
 * Configure the Routes
@@ -22,14 +22,22 @@ app.config(['$routeProvider', function ($routeProvider) {
 	}
 ]);
 
+// persisted authentication with cookies
+app.run(['AuthService', '$rootScope',function run(AuthService, $rootScope){
+	AuthService.getCookie();
+	if (AuthService.isAuthenticated()){
+		$rootScope.userInfo = AuthService.getAuthData();
+		$rootScope.IsLoggedIn = true;
+	}
+}]);
 
 // ------------------------------------------- SERVICES ----------------------------------------------------------
 
 /*
  * Authentication service 
  */
-app.factory('AuthService', ['$rootScope', '$http', '$location', '$q',
-  function ($rootScope, $http, $location, $q) {
+app.factory('AuthService', ['$rootScope', '$http', '$location', '$q', '$cookieStore',
+  function ($rootScope, $http, $location, $q, $cookieStore) {
 	var authFactory = {
         user : {
 			firstName : 'guest',
@@ -64,6 +72,21 @@ app.factory('AuthService', ['$rootScope', '$http', '$location', '$q',
 		return this.user.active == "1";
     };
 	
+	authFactory.getCookie =  function(){
+		var cookie = $cookieStore.get('current.user');	
+		if (cookie){
+			this.user = cookie;
+		}
+	};
+	
+	authFactory.setCookie = function () {
+		$cookieStore.put('current.user', this.user);
+    };
+	
+	authFactory.removeCookie = function () {
+		$cookieStore.remove('current.user', this.user);
+    };
+	
 	authFactory.Login = function($email, $password){
 		var def = $q.defer();
 		
@@ -74,6 +97,7 @@ app.factory('AuthService', ['$rootScope', '$http', '$location', '$q',
 		})
 		.success(function(data, status, headers, config) {
 			if (data.length){
+				//TODO: make sure user is active (valid)
 				def.resolve(data[0]);
 			} else {
 				def.resolve({});
@@ -100,19 +124,22 @@ app.controller('PageCtrl', function ($scope, $location, $http) {
 /*
  * authentication controller 
  */
-app.controller('SigninController', ['AuthService', '$scope','$http','$location','$rootScope', function(AuthService, $scope, $http, $location, $rootScope) {
-	$scope.IsLoggedIn = false;
+app.controller('SigninController', ['AuthService', '$scope','$http','$location','$rootScope', 
+	function(AuthService, $scope, $http, $location, $rootScope) {
 	
 	this.postForm = function() {
+		$rootScope.IsLoggedIn = false;
+		
 		var promise = AuthService.Login(this.email, this.password);
 		promise.then(function(data){
 			if ( data != "" ) {
-				AuthService.setAuthData(data);				
-				$scope.userInfo = AuthService.getAuthData();
-				$scope.IsLoggedIn = true;
+				AuthService.setAuthData(data);		
+				AuthService.setCookie();
+						
+				$rootScope.userInfo = AuthService.getAuthData();
+				$rootScope.IsLoggedIn = true;
 				$location.path('/dash');
 			} else {
-				//TODO: error message should not be global
 				$scope.errorMsg = "Login not correct";
 			}	
 		});		

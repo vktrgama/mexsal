@@ -17,3 +17,10 @@ img.logo {
 .loggedUser {
 	color: #bce8f1;
 }
+
+.logoutLink a {
+	color:red;
+} 
+.logoutLink a:hover {
+	color: blue;
+} 

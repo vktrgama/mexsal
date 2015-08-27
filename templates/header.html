@@ -30,8 +30,8 @@
               <button type="submit" class="btn btn-success">Sign in</button>
               <div class="alert alert-danger" role="alert" ng-show="errorMsg">{{errorMsg}}</div>
         </form>
-        <div ng-show="IsLoggedIn" class="nav navbar-text navbar-right">
-					<span class="loggedUser">Signed in as {{userInfo.firstName}} {{userInfo.lastName}}, {{userInfo.position}}, {{userInfo.company}}</span>
+        <div ng-show="IsLoggedIn" class="nav navbar-text navbar-right logoutLink">
+					<span class="loggedUser">Signed in as {{userInfo.firstName}} {{userInfo.lastName}}, {{userInfo.position}}, {{userInfo.company}}</span> <a class="" href="SigninCtrl.logout()">Logout</a>
 			  </div>  
     </div>
   </div>

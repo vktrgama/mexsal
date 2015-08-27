@@ -99,14 +99,16 @@ app.controller('PageCtrl', function ($scope, $location, $http) {
  * authentication controller 
  */
 app.controller('SigninController', ['AuthService', '$scope','$http','$location','$rootScope', function(AuthService, $scope, $http, $location, $rootScope) {
+	$scope.IsLoggedIn = false;
+	
 	this.postForm = function() {
-		
 		var promise = AuthService.Login(this.email, this.password);
 		promise.then(function(data){
 			if ( data != "" ) {
 				AuthService.setAuthData(data);				
 				$scope.userInfo = AuthService.getAuthData();
-				$location.path('#/dash');
+				$scope.IsLoggedIn = true;
+				$location.path('/dash');
 			} else {
 				//TODO: error message should not be global
 				$scope.errorMsg = "Login not correct";

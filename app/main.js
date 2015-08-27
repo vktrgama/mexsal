@@ -21,6 +21,59 @@ app.config(['$routeProvider', function ($routeProvider) {
 ]);
 
 
+// ------------------------------------------- SERVICES ----------------------------------------------------------
+
+app.factory('AuthService', ['$rootScope', '$http', '$location', '$q',
+  function ($rootScope, $http, $location, $q) {
+	var authFactory = {
+        user : {
+			email : undefined,
+			firstName : 'guest',
+			lastName : 'user',
+			position : "",
+			company : ""                                              
+    	},
+    };
+
+	authFactory.getAuthData = function() {
+		return authFactory.user;
+	};
+	
+	authFactory.setAuthData = function (authData) {
+		this.authFactory.user = {
+			firstName : authData.firstName,
+			lastName : authData.lastName,
+			position : authData.position,
+			company : authData.company
+		}
+	};
+	
+	authFactory.isAuthenticated = function () {
+		return !angular.isUndefined(this.getAuthData().email);
+    };
+	
+	authFactory.Login = function($email, $password){
+		var def = $q.defer();
+		
+		$http({
+			method: 'POST',
+			url: 'dal/userRepo.php',
+			data: { "Func": "AuthUser", "Data": [{"email": $email , "password": $password }] }
+		})
+		.success(function(data, status, headers, config) {
+			def.resolve({"auth": data});
+		})
+		.error(function() {
+                    def.reject("Failed to authenticate user");
+                });
+				
+		return def.promise;
+	};
+	
+	return authFactory;	
+  }]);
+  
+// ------------------------------------------- CONTROLLERS ----------------------------------------------------------
 /*
  * add controller to all the partial pages 
  */
@@ -32,28 +85,20 @@ app.controller('PageCtrl', function ($scope, $location, $http) {
 /*
  * authentication controller 
  */
-app.controller('SigninController', ['$scope', '$http', function($scope, $http) {
+app.controller('SigninController', ['AuthService', '$scope','$http','$location','$rootScope', function(AuthService, $scope, $http, $location, $rootScope) {
 	this.postForm = function() {
 		
-		// post if made as json content type (default)
-		$http({
-			method: 'POST',
-			url: 'dal/userRepo.php',
-			data: { "Func": "AuthUser", "Data": [{"email": this.email , "password": this.password }] }
-		})
-		.success(function(data, status, headers, config) {
-			if ( data ) {
-				window.location.href = '#/dash';
+		var promise = AuthService.Login(this.email, this.password);
+		promise.then(function(data){
+			if ( data.auth == 1 ) {
+				$location.path('#/dash');
 			} else {
+				//TODO: error message should not be global
 				$scope.errorMsg = "Login not correct";
-			}
-		})
-		.error(function(data, status, headers, config) {
-			$scope.errorMsg = 'Unable to submit form';
-		})
-		
+			}	
+		});		
 	}
-}])//end of controller
+}]);//end of controller
 
 
 app.controller('UserInfo',  ['$scope', '$http', function($scope,$http){

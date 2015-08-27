@@ -12,8 +12,10 @@ app.config(['$routeProvider', function ($routeProvider) {
 	.when("/", {templateUrl: "partials/home.html", controller: "PageCtrl"})
 	// Pages
 	.when("/about", {templateUrl: "partials/about.html", controller: "PageCtrl"})
-	.when("/tools", {templateUrl: "partials/toolset.html", controller: "PageCtrl"})
-	.when("/contact", {templateUrl: "partials/contact.html", controller: "PageCtrl"})
+	.when("/tools", {templateUrl: "partials/tools.html", controller: "PageCtrl"})
+	.when("/site", {templateUrl: "partials/site.html", controller: "PageCtrl"})
+	.when("/addsite", {templateUrl: "partials/addsite.html", controller: "PageCtrl"})
+	.when("/updsite", {templateUrl: "partials/updsite.html", controller: "PageCtrl"})
 	.when("/dash", {templateUrl: "partials/pmdash.html", controller: "PageCtrl"})
 	// else 404
 	.otherwise("/404", {templateUrl: "partials/404.html", controller: "PageCtrl"});

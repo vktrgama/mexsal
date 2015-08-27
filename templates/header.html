@@ -1,35 +1,38 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
-    <div class="navbar-header">      
+    <div class="navbar-header">     
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button> 
       <a class="navbar-brand" href="#">
         <span class="bold"> MexSal</span> Project Management Tool
       </a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
+    <div id="navbar" class="navbar-collapse collapse" ng-controller="SigninController as SigninCtrl">
       <!-- common options -->
-      <ul class="nav navbar-nav" ng-controller="SigninController as SigninCtrl">
+      <ul class="nav navbar-nav">
         <li class="active"><a href="#/about">About</a></li>
         <li><a href="#/tools">Toolset</a></li>
-        <li ng-show="IsLoggedIn"><a href="#">Site Information</a></li>
-        <li ng-show="IsLoggedIn"><a href="#">Update Site</a></li>
-        <li ng-show="IsLoggedIn"><a href="#">Add Site</a></li>
-        <!-- logged in options -->
-        <li ng-hide="IsLoggedIn" class="navbar-right">
-          <form class="navbar-form" ng-submit="SigninCtrl.postForm()">
+        <li ng-show="IsLoggedIn"><a href="#/dash">Dashboard</a></li>
+        <li ng-show="IsLoggedIn"><a href="#/addsite">Add Site</a></li>
+        <li ng-show="IsLoggedIn"><a href="#/updsite">Update Site</a></li>
+      </ul>
+       <form ng-hide="IsLoggedIn" class="navbar-form navbar-right" ng-submit="SigninCtrl.postForm()">
               <div class="form-group">
-                <input type="text" placeholder="Email" id="email"  class="form-control" required autofocus ng-model="SigninCtrl.email">
+                <input type="text" placeholder="Email" id="email" class="form-control" required ng-model="SigninCtrl.email">
               </div>
               <div class="form-group">
                 <input type="password" id="password" placeholder="Password" class="form-control" required ng-model="SigninCtrl.password">
               </div>
               <button type="submit" class="btn btn-success">Sign in</button>
               <div class="alert alert-danger" role="alert" ng-show="errorMsg">{{errorMsg}}</div>
-            </form>        
-        </li> 
-        <li ng-show="IsLoggedIn" class="nav navbar-text navbar-right">
-					<p>Signed in as {{userInfo.firstName}} {{userInfo.lastName}}, {{userInfo.position}}, {{userInfo.company}}</p>
-			  </li>
-      </ul>
+        </form>
+        <div ng-show="IsLoggedIn" class="nav navbar-text navbar-right">
+					<span class="loggedUser">Signed in as {{userInfo.firstName}} {{userInfo.lastName}}, {{userInfo.position}}, {{userInfo.company}}</span>
+			  </div>  
     </div>
   </div>
 </nav>

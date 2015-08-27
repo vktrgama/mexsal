@@ -144,4 +144,11 @@ app.controller('SigninController', ['AuthService', '$scope','$http','$location',
 			}	
 		});		
 	}
+	
+	 this.logout = function(){
+		$rootScope.userInfo = {};
+		$rootScope.IsLoggedIn = false;
+		AuthService.removeCookie();
+	 };
+	 
 }]);//end of controller

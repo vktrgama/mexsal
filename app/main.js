@@ -23,33 +23,43 @@ app.config(['$routeProvider', function ($routeProvider) {
 
 // ------------------------------------------- SERVICES ----------------------------------------------------------
 
+/*
+ * Authentication service 
+ */
 app.factory('AuthService', ['$rootScope', '$http', '$location', '$q',
   function ($rootScope, $http, $location, $q) {
 	var authFactory = {
         user : {
-			email : undefined,
 			firstName : 'guest',
 			lastName : 'user',
 			position : "",
-			company : ""                                              
+			company : "",
+			userName : undefined,
+			active : ""                                             
     	},
     };
 
 	authFactory.getAuthData = function() {
-		return authFactory.user;
+		return this.user;
 	};
 	
 	authFactory.setAuthData = function (authData) {
-		this.authFactory.user = {
-			firstName : authData.firstName,
-			lastName : authData.lastName,
-			position : authData.position,
-			company : authData.company
+		this.user = {
+			firstName : authData.First_Name,
+			lastName : authData.Last_Name,
+			position : authData.Position,
+			company : authData.Company,
+			userName : authData.Email,
+			active : authData.Active
 		}
 	};
 	
 	authFactory.isAuthenticated = function () {
-		return !angular.isUndefined(this.getAuthData().email);
+		return !angular.isUndefined(this.user.userName);
+    };
+	
+	authFactory.isActive = function () {
+		return this.user.active == "1";
     };
 	
 	authFactory.Login = function($email, $password){
@@ -61,7 +71,11 @@ app.factory('AuthService', ['$rootScope', '$http', '$location', '$q',
 			data: { "Func": "AuthUser", "Data": [{"email": $email , "password": $password }] }
 		})
 		.success(function(data, status, headers, config) {
-			def.resolve({"auth": data});
+			if (data.length){
+				def.resolve(data[0]);
+			} else {
+				def.resolve({});
+			}
 		})
 		.error(function() {
                     def.reject("Failed to authenticate user");
@@ -78,8 +92,7 @@ app.factory('AuthService', ['$rootScope', '$http', '$location', '$q',
  * add controller to all the partial pages 
  */
 app.controller('PageCtrl', function ($scope, $location, $http) {
- // to be determine
- // somthing commong to all partials
+	//TBD: somthing common to all partials
 });
 
 /*
@@ -90,7 +103,9 @@ app.controller('SigninController', ['AuthService', '$scope','$http','$location',
 		
 		var promise = AuthService.Login(this.email, this.password);
 		promise.then(function(data){
-			if ( data.auth == 1 ) {
+			if ( data != "" ) {
+				AuthService.setAuthData(data);				
+				$scope.userInfo = AuthService.getAuthData();
 				$location.path('#/dash');
 			} else {
 				//TODO: error message should not be global
@@ -99,19 +114,3 @@ app.controller('SigninController', ['AuthService', '$scope','$http','$location',
 		});		
 	}
 }]);//end of controller
-
-
-app.controller('UserInfo',  ['$scope', '$http', function($scope,$http){
-	
-	// post if made as json content type (default)
-	$http({
-		method: 'POST',
-		url: 'dal/userRepo.php',
-		//TODO: user email should come from the session object
-		data: { "Func": "GetUserInfo", "Data": [{"email": "renesanchez@mexsal.com" }] }
-	})
-	.success(function(response){
-		$scope.userInfo = response;
-	})
-
-}]);

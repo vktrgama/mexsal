@@ -15,7 +15,7 @@ if ($callback!=''){
 // ---------- dal repository Methods ----------------
 
 // Authenticates user agains the database
-function AuthUser($data, $conn){
+function AuthUserOld($data, $conn){
 	$email = $data->email;
 	$pass = $data->password;
 		
@@ -30,17 +30,19 @@ function AuthUser($data, $conn){
 		}
 };
 
-// Get User information from Database
-function GetUserInfo($data, $conn)
-{
+function AuthUser($data, $conn){
 	$email = $data->email;
-	$result = $conn->query("SELECT * FROM sampleusers WHERE Email='$email'");
+	$pass = $data->password;
 	$rows = array();
+
+	$sql="SELECT * FROM sampleusers WHERE  Email='$email' and Password='$pass'";
+	$result = $conn->query($sql);
 	while($r = mysqli_fetch_assoc($result)) {
 		$rows[] = $r;
 	}
 	print json_encode($rows);
-}
+};
+
 
 // close databse connetion
 $conn->close();

@@ -21,6 +21,11 @@ img.logo {
 .logoutLink a {
 	color:red;
 } 
+
 .logoutLink a:hover {
 	color: blue;
 } 
+
+.container_offset_fix{
+	margin-top:70px;
+}

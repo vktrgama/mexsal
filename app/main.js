@@ -31,6 +31,11 @@ app.run(['AuthService', '$rootScope',function run(AuthService, $rootScope){
 	}
 }]);
 
+// create a service to manage cache
+app.factory('superCache', ['$cacheFactory', function($cacheFactory) {
+    return $cacheFactory('super-cache');
+  }]);
+
 /*
  * add controller to all the partial pages 
  */

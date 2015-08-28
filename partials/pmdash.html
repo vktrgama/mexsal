@@ -1,36 +1,28 @@
 <link rel="stylesheet" type="text/css" href="../assets/css/dash.css">
-<div class="container">
+
+<div class="container" ng-controller="SitesController">
   <div class="row">
     <div class="col-lg-12">
       <div class="bs-example" data-example-id="hoverable-table">
           <table class="table table-hover">
             <thead>
-              <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
-              </tr>
+                <th width="160">Site Number</th>
+                <th width="240">Site Name</th> 
+                <th width="240">Site Address</th>
+                <th width="120">Site City</th>
+                <th width="100">Site State</th> 
+                <th width="100">Site Zip</th>
+                <th width="100">Site Status</th>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              <tr ng-repeat="data in mySites |  filter:Site_Number=site ">
+              <td>{{data.Site_Number}}</td>
+              <td>{{data.Site_Name}}</td>
+              <td>{{data.Site_Address}}</td>
+              <td>{{data.Site_City}}</td>
+              <td>{{data.Site_State}}</td>
+              <td>{{data.Site_Zip}}</td>
+              <td>{{data.Status}}</td>
             </tbody>
           </table>
        </div>

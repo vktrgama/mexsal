@@ -32,7 +32,6 @@ app.run(['AuthService', '$rootScope',function run(AuthService, $rootScope){
 }]);
 
 // ------------------------------------------- SERVICES ----------------------------------------------------------
-
 /*
  * Authentication service 
  */
@@ -44,7 +43,7 @@ app.factory('AuthService', ['$rootScope', '$http', '$location', '$q', '$cookieSt
 			lastName : 'user',
 			position : "",
 			company : "",
-			userName : undefined,
+			email : undefined,
 			active : ""                                             
     	},
     };
@@ -59,13 +58,13 @@ app.factory('AuthService', ['$rootScope', '$http', '$location', '$q', '$cookieSt
 			lastName : authData.Last_Name,
 			position : authData.Position,
 			company : authData.Company,
-			userName : authData.Email,
+			email : authData.Email,
 			active : authData.Active
 		}
 	};
 	
 	authFactory.isAuthenticated = function () {
-		return !angular.isUndefined(this.user.userName);
+		return !angular.isUndefined(this.user.email);
     };
 	
 	authFactory.isActive = function () {
@@ -151,4 +150,4 @@ app.controller('SigninController', ['AuthService', '$scope','$http','$location',
 		AuthService.removeCookie();
 	 };
 	 
-}]);//end of controller
+}]);

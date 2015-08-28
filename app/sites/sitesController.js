@@ -1,5 +1,6 @@
 app.controller('SitesController', ['$scope','$http','$rootScope', 'superCache',
 	function ($scope, $http, $rootScope, superCache) {	
+		
 		var cachedSites = superCache.get('mySites');
 		if (cachedSites != null){
 			// get sites from cache
@@ -23,5 +24,9 @@ app.controller('SitesController', ['$scope','$http','$rootScope', 'superCache',
 				});
 			}
 		}
+		
+		$scope.openSiteModal = function (site) {
+			alert(site.Site_Name);
+		};
 	}
 ]);

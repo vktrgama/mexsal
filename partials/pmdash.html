@@ -15,17 +15,18 @@
                 <th width="100">Site Status</th>
             </thead>
             <tbody>
-              <tr ng-repeat="data in mySites |  filter:Site_Number=site ">
-              <td>{{data.Site_Number}}</td>
-              <td>{{data.Site_Name}}</td>
-              <td>{{data.Site_Address}}</td>
-              <td>{{data.Site_City}}</td>
-              <td>{{data.Site_State}}</td>
-              <td>{{data.Site_Zip}}</td>
-              <td>{{data.Status}}</td>
+              <tr ng-repeat="site in mySites |  filter:Site_Number=site " ng-class="{'danger': site.Site_Number == 295126}">
+              <td><span class="btn btn-sm btn-primary" ng-click="openSiteModal(site)" role="button">{{site.Site_Number}}</span></td>
+              <td>{{site.Site_Name}}</td>
+              <td>{{site.Site_Address}}</td>
+              <td>{{site.Site_City}}</td>
+              <td>{{site.Site_State}}</td>
+              <td>{{site.Site_Zip}}</td>
+              <td>{{site.Status}}</td>
             </tbody>
           </table>
        </div>
     </div> 
-</div>    
+  </div> 
 </div>
+

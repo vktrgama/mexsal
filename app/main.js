@@ -37,7 +37,7 @@ app.factory('superCache', ['$cacheFactory', function($cacheFactory) {
   }]);
 
 /*
- * add controller to all the partial pages 
+ * add generic controller to all the partial pages 
  */
 app.controller('PageCtrl', function ($scope, $location, $http) {
 	//TBD: something common to all partials

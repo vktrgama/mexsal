@@ -1,4 +1,4 @@
-<?php include ("../helpers/dbConn.php");?>
+<?php include ("../helpers/dbConnHelper.php");?>
 <?php 
 //header("Content-Type: text/html");
 
@@ -15,21 +15,6 @@ if ($callback!=''){
 // ---------- dal repository Methods ----------------
 
 // Authenticates user agains the database
-function AuthUserOld($data, $conn){
-	$email = $data->email;
-	$pass = $data->password;
-		
-	$sql="SELECT ID FROM `sampleusers` WHERE  Email='$email' and Password='$pass'";
-	$result = $conn->query($sql);
-		if ($result->num_rows > 0) {
-			echo true; 
-		}
-		else
-		{
-			echo false;
-		}
-};
-
 function AuthUser($data, $conn){
 	$email = $data->email;
 	$pass = $data->password;

@@ -15,7 +15,7 @@ img.logo {
 }
 
 .loggedUser {
-	color: #bce8f1;
+	color: #8ea288;
 }
 
 .logoutLink a {
@@ -28,4 +28,8 @@ img.logo {
 
 .container_offset_fix{
 	margin-top:70px;
+}
+
+.companyName {
+	color: #8ea288;
 }

@@ -28,5 +28,20 @@
        </div>
     </div> 
   </div> 
+  <div ng-show="showSite">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{siteSelected.Site_Name}}</h3>
+      </div>
+      <div class="panel-body">
+        {{siteSelected.Site_Address}}
+        {{siteSelected.Site_City}}
+        {{siteSelected.Site_State}}
+        {{siteSelected.Site_Zip}}
+        {{siteSelected.Status}}
+      </div>
+    </div>
+  </div>
 </div>
+
 
